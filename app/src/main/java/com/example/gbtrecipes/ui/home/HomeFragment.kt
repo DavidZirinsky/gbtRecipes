@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
@@ -36,12 +37,13 @@ private var _binding: FragmentHomeBinding? = null
 
     val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
     val name= sharedPref?.getString("apiKey","")
-//    val textView: TextView = binding.textHome
+    val textView: TextView = binding.warning
     homeViewModel.text.observe(viewLifecycleOwner) {
       if(name.equals("")){
+          textView.text = "No Api Key Set, Add One In The Api Key Menu"
       }
       else{
-//          textView.text = "What do you want to make"
+          textView.text = "Lets Get Cooking!"
       }
     }
       button.isEnabled = false
