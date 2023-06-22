@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.gbtrecipes.databinding.FragmentGalleryBinding
@@ -34,12 +35,15 @@ private var _binding: FragmentGalleryBinding? = null
       text.setText(apiKey)
   button.setOnClickListener(View.OnClickListener { view ->
 
-      val sharedPref = getActivity()?.getPreferences(Context.MODE_PRIVATE)
+      val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
       if (sharedPref != null) {
           with (sharedPref.edit()) {
               putString("apiKey", text.text.toString())
               apply()
           }
+          Toast.makeText(
+              activity, "Your Api Key Has Been Saved",
+              Toast.LENGTH_LONG).show();
       }
 
   })
