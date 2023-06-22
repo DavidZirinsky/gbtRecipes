@@ -2,7 +2,7 @@
 
 **gbtRecipies** is a sample app that queries the openAI API to generate any recipe you want via the `gpt-3.5-turbo-0613` model. 
 
-You'll have to provide your own Api Ke as I'm not made of Money 💰
+You'll have to provide your own Api Key as I'm not made of Money 💰
 <br>
 <br>
 
