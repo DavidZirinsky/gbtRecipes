@@ -10,7 +10,7 @@ You'll have to provide your own Api Key as I'm not made of Money 💰
 
 
 ## How To Build This: 🛠
-We all know that android studio can be finnicky importing projects. This project was build with Android Studio version: `Android Studio Flamingo | 2022.2.1 Patch 2` so I'd recommend matching that version of Android Studio if you're having issues importing this project. 
+We all know that android studio can be finnicky importing projects. This project was build with: `Android Studio Flamingo | 2022.2.1 Patch 2` so I'd recommend matching that version of Android Studio if you're having issues importing this project. 
 
 
 ## I Don't Want To Read Through Your Code, What's The Magical Curl Command? 💻 
