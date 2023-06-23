@@ -1,6 +1,6 @@
 # gbtRecipies A Recipe Generator For Any Dish You Can Think Of  📖
 
-**gbtRecipies** is a sample app that queries the openAI API to generate any recipe you want via the `gpt-3.5-turbo-0613` model. 
+**gbtRecipies** is a sample app that queries the OpenAI API to generate any recipe you want via the `gpt-3.5-turbo-0613` model. 
 
 You'll have to provide your own Api Key as I'm not made of Money 💰
 <br>
@@ -14,7 +14,7 @@ We all know that android studio can be finnicky importing projects. This project
 
 
 ## I Don't Want To Read Through Your Code, What's The Magical Curl Command? 💻 
-This also does the magic for ya, no app required
+This also does the magic for ya, no app required. We can make use of the new ability of OpenAi's api to output json with a sepcific schema: 
 ```
 curl --location 'https://api.openai.com/v1/chat/completions' \
 --header 'Content-Type: application/json' \
