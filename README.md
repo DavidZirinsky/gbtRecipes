@@ -66,6 +66,7 @@ curl --location 'https://api.openai.com/v1/chat/completions' \
 }'
 ```
 <br>
+
 ## App Store Download📱
 <p align="left">
 <a href="https://play.google.com/store/apps/details?id=com.davidz.gbtrecipes">
