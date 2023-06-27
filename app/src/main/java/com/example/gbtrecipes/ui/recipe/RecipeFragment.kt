@@ -97,6 +97,7 @@ private var _binding: FragmentRecipeBinding? = null
     savedInstanceState: Bundle?
   ): View {
       val dishName = requireArguments().getString("dishName", "")
+      val dietaryRestrictions = requireArguments().getString("dietaryRestrictions", "")
       val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
       val apiKey= sharedPref?.getString("apiKey","")
 
@@ -113,7 +114,7 @@ private var _binding: FragmentRecipeBinding? = null
           _binding!!.dishNameTextView.text = dishName.capitalize()
           try {
               val response = withContext(Dispatchers.IO) {
-                  dishName?.let { makeOpenAiRequest(it, apiKey!!) }
+                  dishName?.let { makeOpenAiRequest(it, dietaryRestrictions!!, apiKey!!) }
               }
 
               val recipe = response?.let { parseRecipeFromJson(it) }
@@ -160,8 +161,7 @@ override fun onDestroyView() {
         _binding = null
     }
 
-    fun makeOpenAiRequest(recipeName: String, token: String): String{
-        println(token)
+    fun makeOpenAiRequest(recipeName: String, dietaryRestrictions: String, token: String): String{
         val url = URL("https://api.openai.com/v1/chat/completions")
         val connection = url.openConnection() as HttpURLConnection
 
@@ -172,14 +172,17 @@ override fun onDestroyView() {
         val credentials = "$username:$password"
         val encodedCredentials = Base64.encodeToString(credentials.toByteArray(), Base64.NO_WRAP)
         connection.setRequestProperty("Authorization", "Basic $encodedCredentials")
-        println(connection.getRequestProperty("Authorization"))
         connection.doOutput = true
+        var instructions = "Provide a recipe for $recipeName"
+        if(!dietaryRestrictions.equals("")){
+            instructions = "Provide a recipe for $recipeName, dietary restrictions are no $dietaryRestrictions"
+        }
         val requestBody = """
         {
             "model": "gpt-3.5-turbo-0613",
             "messages": [
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": "Provide a recipe for $recipeName"}
+                {"role": "user", "content": "$instructions"}
             ],
             "functions": [
                 {
@@ -219,6 +222,7 @@ override fun onDestroyView() {
             "temperature": 0
         }
     """.trimIndent()
+
         val outputStream = DataOutputStream(connection.outputStream)
         outputStream.writeBytes(requestBody)
         outputStream.flush()
@@ -226,8 +230,7 @@ override fun onDestroyView() {
 
         val responseCode = connection.responseCode
         val mes = connection.responseMessage
-        println("Response Code: $responseCode")
-        println("Response mes: $mes")
+
         if (responseCode != HttpURLConnection.HTTP_OK) {
             // Handle other non-OK response codes here
             throw Exception("HTTP error code: $responseCode")
@@ -241,7 +244,6 @@ override fun onDestroyView() {
         reader.close()
 
         val responseBody = response.toString()
-        println("Response Body: $responseBody")
         val jsonResponse = JSONObject(responseBody)
         val choicesArray = jsonResponse.getJSONArray("choices")
         val firstChoice = choicesArray.getJSONObject(0)

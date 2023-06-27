@@ -66,9 +66,11 @@ private var _binding: FragmentHomeBinding? = null
       })
       button.setOnClickListener {
           var recipeName = binding.recipe.text.toString()
+          var dietaryRestrictions = binding.dietaryRestrictionsInput.text.toString()
           val someFragment: Fragment = RecipeFragment()
           val args = Bundle()
           args.putString("dishName", recipeName)
+          args.putString("dietaryRestrictions", dietaryRestrictions)
           someFragment.setArguments(args)
           val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
           transaction.replace(

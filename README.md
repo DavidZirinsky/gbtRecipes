@@ -2,16 +2,18 @@
 
 **gbtRecipies** is a sample app that queries the openAI API to generate any recipe you want via the `gpt-3.5-turbo-0613` model. 
 
-You'll have to provide your own Api Ke as I'm not made of Money 💰
+You'll have to provide your own Api Key as I'm not made of Money 💰
 <br>
 <br>
 
 <img src="github_assets/first_screen.png" width="325"/> <img src="github_assets/loading.png" width="325"/>  <img src="github_assets/recipe.png" width="325"/> 
 
+<br>
 
 ## How To Build This: 🛠
 We all know that android studio can be finnicky importing projects. This project was build with Android Studio version: `Android Studio Flamingo | 2022.2.1 Patch 2` so I'd recommend matching that version of Android Studio if you're having issues importing this project. 
 
+<br>
 
 ## I Don't Want To Read Through Your Code, What's The Magical Curl Command? 💻 
 This also does the magic for ya, no app required
@@ -63,6 +65,14 @@ curl --location 'https://api.openai.com/v1/chat/completions' \
   "temperature":0
 }'
 ```
+<br>
+## App Store Download📱
+<p align="left">
+<a href="https://play.google.com/store/apps/details?id=com.davidz.gbtrecipes">
+  <img src="github_assets/google_play.svg" width="25%">
+</a>
+<br>
+
 
 ## Demo Video 🎥 
 [![Video](https://img.youtube.com/vi/aR_MctsD9zY/0.jpg)](https://www.youtube.com/watch?v=aR_MctsD9zY)

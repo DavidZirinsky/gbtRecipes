@@ -27,6 +27,28 @@
         />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dietary_restrictions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/client_id_input_layout"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dietary_restrictions_input"
+            app:boxBackgroundColor="@android:color/transparent"
+            android:hint="Any Dietary Restrictions? (Optional)"
+            android:inputType="textEmailAddress"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/client_id_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
