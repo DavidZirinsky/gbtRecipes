@@ -98,6 +98,7 @@ private var _binding: FragmentRecipeBinding? = null
   ): View {
       val dishName = requireArguments().getString("dishName", "")
       val dietaryRestrictions = requireArguments().getString("dietaryRestrictions", "")
+      val metric = requireArguments().getString("metric", "false").toBoolean()
       val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
       val apiKey= sharedPref?.getString("apiKey","")
 
@@ -114,7 +115,7 @@ private var _binding: FragmentRecipeBinding? = null
           _binding!!.dishNameTextView.text = dishName.capitalize()
           try {
               val response = withContext(Dispatchers.IO) {
-                  dishName?.let { makeOpenAiRequest(it, dietaryRestrictions!!, apiKey!!) }
+                  dishName?.let { makeOpenAiRequest(it, dietaryRestrictions!!, apiKey!!, metric!!) }
               }
 
               val recipe = response?.let { parseRecipeFromJson(it) }
@@ -161,7 +162,7 @@ override fun onDestroyView() {
         _binding = null
     }
 
-    fun makeOpenAiRequest(recipeName: String, dietaryRestrictions: String, token: String): String{
+    fun makeOpenAiRequest(recipeName: String, dietaryRestrictions: String, token: String, metric: Boolean): String{
         val url = URL("https://api.openai.com/v1/chat/completions")
         val connection = url.openConnection() as HttpURLConnection
 
@@ -177,12 +178,17 @@ override fun onDestroyView() {
         if(!dietaryRestrictions.equals("")){
             instructions = "Provide a recipe for $recipeName, dietary restrictions are no $dietaryRestrictions"
         }
+        var unitType = "imperial"
+        if (metric) {
+            unitType = "metric"
+        }
+        var finalInstructions = "$instructions, use the $unitType system for measurements"
         val requestBody = """
         {
             "model": "gpt-3.5-turbo-0613",
             "messages": [
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": "$instructions"}
+                {"role": "user", "content": "$finalInstructions"}
             ],
             "functions": [
                 {

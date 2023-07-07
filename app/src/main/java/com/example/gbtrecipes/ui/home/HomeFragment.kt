@@ -41,9 +41,11 @@ private var _binding: FragmentHomeBinding? = null
     homeViewModel.text.observe(viewLifecycleOwner) {
       if(name.equals("")){
           textView.text = "No Api Key Set, Add One In The Api Key Menu"
+          button.isEnabled = false // no api key means you can't make a request
       }
       else{
           textView.text = "Lets Get Cooking!"
+          button.isEnabled = true
       }
     }
       button.isEnabled = false
@@ -66,11 +68,13 @@ private var _binding: FragmentHomeBinding? = null
       })
       button.setOnClickListener {
           var recipeName = binding.recipe.text.toString()
+          var metric = binding.metric.isChecked()
           var dietaryRestrictions = binding.dietaryRestrictionsInput.text.toString()
           val someFragment: Fragment = RecipeFragment()
           val args = Bundle()
           args.putString("dishName", recipeName)
           args.putString("dietaryRestrictions", dietaryRestrictions)
+          args.putString("metric", metric.toString())
           someFragment.setArguments(args)
           val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
           transaction.replace(

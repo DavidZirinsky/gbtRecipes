@@ -76,7 +76,7 @@ curl --location 'https://api.openai.com/v1/chat/completions' \
 
 
 ## Demo Video 🎥 
-[![Video](https://img.youtube.com/vi/l0I2ws2asKE/0.jpg)](https://youtu.be/l0I2ws2asKE)
+[![Video](https://img.youtube.com/vi/iMwPzn8f33c/0.jpg)](https://youtu.be/iMwPzn8f33c)
 
 ## Find this project useful? 🔎
 
